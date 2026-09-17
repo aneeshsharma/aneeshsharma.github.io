@@ -18,7 +18,7 @@ function formatDate(date: Date) {
 }
 ---
 
-<BaseLayout title={`~/homepage/blogs/${post.id}`} description={post.data.description}>
+<BaseLayout path={`~/homepage/blogs/${post.id}`} description={post.data.description}>
   <article class="section post">
     <a href="/blog" class="back">← all writing</a>
     <div class="date">{formatDate(post.data.date)}</div>

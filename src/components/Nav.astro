@@ -1,4 +1,10 @@
 ---
+interface Props {
+  path?: string;
+}
+
+const { path = '~/homepage' } = Astro.props;
+
 const tabs = [
   { href: '/#about', label: 'about', accent: 'var(--yellow)' },
   { href: '/#work', label: 'work', accent: 'var(--blue)' },
@@ -9,7 +15,7 @@ const tabs = [
 ---
 
 <nav>
-  <a href="/" class="wordmark">~/homepage</a>
+  <a href="/" class="wordmark">{path}</a>
   <div class="tabs">
     {
       tabs.map((tab) => (
