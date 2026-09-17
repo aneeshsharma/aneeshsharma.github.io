@@ -9,40 +9,17 @@
     conditions.
   href: https://github.com/Prototype-Aether
   tags: [Rust, P2P Networking, crates.io]
-  span: 4
+  span: 3
   accent: purple
 
-- id: portfolio-site
+- id: discord-audio-share-linux
   order: 2
-  title: This Site
+  title: DiscordAudioShare-Linux
   description: >-
-    This portfolio, rewritten from scratch — Astro, Markdown/YAML-driven
-    content collections, and a hand-built Gruvbox Material "notebook" theme,
-    statically deployed to GitHub Pages.
-  href: https://github.com/aneeshsharma/aneeshsharma.github.io
-  tags: [Astro, TypeScript]
-  span: 2
+    A utility to share audio on Discord on Linux by routing your desktop
+    audio through your mic, using PulseAudio to create a virtual sink and
+    loopback so any app's output can be picked up as mic input.
+  href: https://github.com/aneeshsharma/DiscordAudioShare-Linux
+  tags: [Shell, PulseAudio, Linux]
+  span: 3
   accent: blue
-
-- id: simplq-golang
-  order: 3
-  title: SimplQ (Go backend)
-  description: >-
-    Open-source virtual queue management platform. Led the port of its
-    backend from Java/Spring Boot to Go as primary contributor, redesigning
-    the data layer around MongoDB.
-  href: https://github.com/SimplQ/simplQ-golang
-  tags: [Go, MongoDB, Open Source]
-  span: 3
-  accent: orange
-
-- id: com-aether
-  order: 4
-  title: com-aether
-  description: >-
-    An end-to-end encrypted messaging app with a relay-only server (it can't
-    read message content), local-only message storage, and a Java Swing GUI.
-  href: https://github.com/aneeshsharma/com-aether
-  tags: [Java, Encryption, Swing]
-  span: 3
-  accent: greenAlt

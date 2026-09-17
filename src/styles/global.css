@@ -1,8 +1,8 @@
 /* Gruvbox Material "notebook" theme tokens */
 
 :root {
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-body: 'Lora', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-body: 'Fraunces', Georgia, serif;
 }
 
 :root[data-theme='dark'] {
