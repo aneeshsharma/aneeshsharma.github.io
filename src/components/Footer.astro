@@ -4,11 +4,9 @@ import LinkedInIcon from './icons/LinkedInIcon.astro';
 
 const GITHUB_URL = 'https://github.com/aneeshsharma';
 const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
-const year = new Date().getFullYear();
 ---
 
 <footer>
-  <div class="copy">© {year} — built with gruvbox-material</div>
   <div class="links">
     <a href={GITHUB_URL} aria-label="GitHub" target="_blank" rel="noreferrer">
       <GitHubIcon size={16} />
@@ -27,13 +25,7 @@ const year = new Date().getFullYear();
     padding: 8px 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-  }
-
-  .copy {
-    font-family: var(--font-mono);
-    color: var(--status-text);
-    font-size: 12px;
+    justify-content: flex-end;
   }
 
   .links {
