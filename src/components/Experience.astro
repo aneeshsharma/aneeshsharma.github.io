@@ -1,0 +1,167 @@
+---
+import { getCollection } from 'astro:content';
+
+const jobs = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="work" class="section">
+  <div class="eyebrow" style="color: var(--blue)">02 / experience</div>
+  <h2>Where I've worked</h2>
+  <div class="accent-bar" style="background: var(--blue)"></div>
+  <div class="timeline">
+    {
+      jobs.map((job) => (
+        <div class="row">
+          <div class="period">{job.data.period}</div>
+          <div class="rail">
+            <svg width="16" height="16" viewBox="0 0 16 16">
+              <path
+                d="M8 2c-3 0-5.5 2.5-5.7 5.4-.1 1.6.5 3 1.6 4C5 12.5 6.5 13 8 13c2.9 0 5.6-2 5.9-5 .2-2.3-1-4.5-3.1-5.5"
+                fill="none"
+                stroke="var(--yellow)"
+                stroke-width="1.6"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span class="connector" />
+          </div>
+          <div class="content">
+            <h3>{job.data.role} <span class="company">@ {job.data.company}</span></h3>
+            <p>{job.data.description}</p>
+          </div>
+        </div>
+      ))
+    }
+    <div class="egg-row">
+      <div></div>
+      <div class="egg-dot-wrap">
+        <span class="egg-dot" />
+      </div>
+      <div class="egg-text">···· beginning of time</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  h2 {
+    font-size: 32px;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .accent-bar {
+    border-radius: 2px;
+    margin-bottom: 36px;
+  }
+
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 140px 24px 1fr;
+    gap: 0;
+  }
+
+  .period {
+    font-family: var(--font-mono);
+    color: var(--blue);
+    font-size: 16px;
+    padding-top: 2px;
+  }
+
+  .rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rail svg {
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .connector {
+    width: 1px;
+    flex: 1;
+    background: var(--border);
+  }
+
+  .content {
+    padding-bottom: 40px;
+  }
+
+  h3 {
+    margin: 0 0 6px;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .company {
+    color: var(--dim);
+    font-weight: 500;
+  }
+
+  .content p {
+    color: var(--dim);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .egg-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 140px 24px 1fr;
+    gap: 0;
+  }
+
+  .egg-dot-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .egg-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--faint);
+    opacity: 0.4;
+    margin-top: 2px;
+  }
+
+  .egg-text {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--faint);
+    opacity: 0;
+    transition: opacity 0.3s;
+    cursor: help;
+  }
+
+  .egg-row:hover .egg-text {
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .row,
+    .egg-row {
+      grid-template-columns: 90px 20px 1fr;
+    }
+
+    .period {
+      font-size: 13px;
+    }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  path?: string;
+  description?: string;
+}
+
+const { path, description = "Anish Sharma's personal site — software engineer, builder of things." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>It's Anish</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Lora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline>
+      (function () {
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const stored = localStorage.getItem('theme');
+        const theme = stored || (media.matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+
+        if (!stored) {
+          media.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+              document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+          });
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <Nav path={path} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>

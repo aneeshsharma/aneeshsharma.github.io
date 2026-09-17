@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+---
+
+<section id="blog" class="section">
+  <div class="eyebrow" style="color: var(--purple)">04 / writing</div>
+  <h2>Recent writing</h2>
+  <div class="accent-bar" style="background: var(--purple)"></div>
+  <div class="list">
+    {
+      posts.map((post) => (
+        <a href={`/blog/${post.id}/`}>
+          <span class="title">{post.data.title}</span>
+          <span class="date">{formatDate(post.data.date)}</span>
+        </a>
+      ))
+    }
+  </div>
+  <a href="/blog" class="all-posts">all posts →</a>
+</section>
+
+<style>
+  h2 {
+    font-size: 32px;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .accent-bar {
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--body-color);
+  }
+
+  .list a:hover .title {
+    text-decoration: underline;
+  }
+
+  .title {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .date {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  .all-posts {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--purple);
+  }
+
+  .all-posts:hover {
+    text-decoration: underline;
+  }
+</style>

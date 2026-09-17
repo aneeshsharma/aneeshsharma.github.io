@@ -1,0 +1,29 @@
+- id: uber
+  order: 1
+  period: Nov 2025 — Present
+  role: Software Engineer 2
+  company: Uber (Uber for Business)
+  description: >-
+    Building onboarding flows for enterprise customers. Hunted down a
+    year-old React bug nobody could crack and killed the site's noisiest
+    on-call alert in the process.
+
+- id: traceable
+  order: 2
+  period: Nov 2023 — Nov 2025
+  role: Software Engineer 2
+  company: Traceable by Harness
+  description: >-
+    Built dashboards and rule engines for an API security product —
+    lots of Angular, D3.js, and untangling gnarly data. A couple of my
+    features ended up sealing deals with new customers.
+
+- id: wells-fargo
+  order: 3
+  period: Jul 2022 — Oct 2023
+  role: Software Engineer
+  company: Wells Fargo
+  description: >-
+    My first real job. Built a tool for validating and cleaning up
+    financial transaction data, and figured out how "shipping software"
+    actually works along the way.
