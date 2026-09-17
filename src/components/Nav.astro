@@ -1,0 +1,115 @@
+---
+const tabs = [
+  { href: '/#about', label: 'about', accent: 'var(--yellow)' },
+  { href: '/#work', label: 'work', accent: 'var(--blue)' },
+  { href: '/#projects', label: 'projects', accent: 'var(--green-alt)' },
+  { href: '/blog', label: 'blog', accent: 'var(--purple)' },
+  { href: '/#contact', label: 'contact', accent: 'var(--orange)' },
+];
+---
+
+<nav>
+  <a href="/" class="wordmark">~/homepage</a>
+  <div class="tabs">
+    {
+      tabs.map((tab) => (
+        <a href={tab.href} style={`background: ${tab.accent}`}>
+          {tab.label}
+        </a>
+      ))
+    }
+    <button id="theme-toggle" aria-label="Toggle theme" type="button">
+      <span id="theme-toggle-label">dark</span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 14px 48px 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .wordmark {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--yellow);
+    padding-bottom: 12px;
+  }
+
+  .tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+
+  .tabs a {
+    color: var(--bg);
+    padding: 8px 16px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  #theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--heading);
+    padding: 8px 12px;
+    border-radius: 8px 8px 0 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 12px 20px 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tabs {
+      gap: 4px;
+    }
+
+    .tabs a,
+    #theme-toggle {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const button = document.getElementById('theme-toggle');
+    const label = document.getElementById('theme-toggle-label');
+
+    function sync() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      label.textContent = theme === 'dark' ? '☾ dark' : '☀ light';
+    }
+
+    sync();
+
+    button.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      sync();
+    });
+  })();
+</script>

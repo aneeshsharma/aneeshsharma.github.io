@@ -1,0 +1,39 @@
+- id: uber
+  order: 1
+  period: Nov 2025 — Present
+  role: Software Engineer 2
+  company: Uber (Uber for Business)
+  description: >-
+    Leading frontend development of enterprise onboarding initiatives.
+    Root-caused a year-old, unresolved production React error to
+    browser-extension DOM interference, cutting error volume by 86% and
+    eliminating what had been the highest-volume on-call alert. Built a
+    use-case-based program setup flow that lifted org onboarding completion
+    by ~15%, and a gamified dashboard engagement feature that lifted
+    first-ride conversion by ~10%.
+
+- id: traceable
+  order: 2
+  period: Nov 2023 — Nov 2025
+  role: Software Engineer 2
+  company: Traceable by Harness
+  description: >-
+    Spearheaded frontend development of API security and observability
+    features (Angular, D3.js, GraphQL), directly contributing to the
+    acquisition of 5 enterprise customers. Designed complex security
+    analytics and data visualization experiences, including a
+    fully user-configurable rule engine for detecting policy violations in
+    live API traffic and a multi-format API documentation ingestion system
+    with automatic cross-file reference resolution.
+
+- id: wells-fargo
+  order: 3
+  period: Jul 2022 — Oct 2023
+  role: Software Engineer
+  company: Wells Fargo
+  description: >-
+    Built a full-stack ETL tool (Angular, Spring Boot) for validating and
+    transforming financial transaction data across MongoDB, SQL Server, and
+    S3, including a rules-management UI and a reusable JSON-to-table
+    rendering framework. Set up CI/CD pipelines with Jenkins and GitHub,
+    and mentored new engineers onto the team.

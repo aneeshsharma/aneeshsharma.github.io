@@ -1,0 +1,202 @@
+---
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+function accentVar(accent: string) {
+  return accent === 'greenAlt' ? '--green-alt' : `--${accent}`;
+}
+---
+
+<section id="projects" class="section">
+  <div class="eyebrow" style="color: var(--green-alt)">03 / projects</div>
+  <h2>Things I've built</h2>
+  <div class="accent-bar" style="background: var(--green-alt)"></div>
+  <div class="grid">
+    {
+      projects.map((project) => (
+        <div class="card" data-span={project.data.span}>
+          {project.data.image ? (
+            <img src={project.data.image} alt={project.data.title} class="thumb" />
+          ) : (
+            <div class="placeholder">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5-9 9" />
+              </svg>
+              <span>Screenshot coming soon</span>
+            </div>
+          )}
+          <div class="body">
+            <div class="head">
+              <h3>{project.data.title}</h3>
+              {project.data.href && (
+                <a href={project.data.href} target="_blank" rel="noreferrer" class="view-link">
+                  {project.data.span === 2 ? '→' : 'view →'}
+                </a>
+              )}
+            </div>
+            <p>{project.data.description}</p>
+            <div class="tags">
+              {project.data.tags.map((tag) => (
+                <span style={`color: var(${accentVar(project.data.accent)})`}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  h2 {
+    font-size: 32px;
+    margin: 0 0 12px;
+    font-weight: 700;
+  }
+
+  .accent-bar {
+    border-radius: 2px;
+    margin-bottom: 36px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    padding-bottom: 56px;
+  }
+
+  .card {
+    grid-column: span var(--span, 3);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card[data-span='4'] {
+    --span: 4;
+  }
+  .card[data-span='3'] {
+    --span: 3;
+  }
+  .card[data-span='2'] {
+    --span: 2;
+  }
+
+  .thumb {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+  }
+  .card[data-span='4'] .thumb {
+    height: 280px;
+  }
+  .card[data-span='2'] .thumb {
+    height: 150px;
+  }
+
+  .placeholder {
+    width: 100%;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--card-bg);
+    border-bottom: 1px dashed var(--border-strong);
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .card[data-span='4'] .placeholder {
+    height: 280px;
+  }
+  .card[data-span='2'] .placeholder {
+    height: 150px;
+  }
+
+  .body {
+    padding: 22px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .card[data-span='4'] .body {
+    padding: 24px;
+  }
+  .card[data-span='2'] .body {
+    padding: 20px;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 700;
+  }
+  .card[data-span='4'] h3 {
+    font-size: 22px;
+  }
+  .card[data-span='2'] h3 {
+    font-size: 18px;
+  }
+
+  .view-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--green);
+    white-space: nowrap;
+  }
+
+  .body p {
+    margin: 0 0 12px;
+    color: var(--dim);
+    font-size: 14px;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .card[data-span='4'] .body p {
+    font-size: 15px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tags span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card,
+    .card[data-span='4'],
+    .card[data-span='3'],
+    .card[data-span='2'] {
+      grid-column: span 1;
+    }
+  }
+</style>
