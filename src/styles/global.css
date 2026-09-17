@@ -135,10 +135,12 @@ img {
   max-width: 1100px;
   margin: 0 auto;
   padding: 56px 48px 0;
+  scroll-margin-top: 52px;
 }
 
 @media (max-width: 768px) {
   .section {
     padding: 40px 24px 0;
+    scroll-margin-top: 53px;
   }
 }
