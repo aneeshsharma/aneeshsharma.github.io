@@ -46,7 +46,21 @@ const { title, description = "Anish Sharma's personal site — software engineer
   </head>
   <body>
     <Nav />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>
