@@ -2,11 +2,12 @@
   order: 1
   period: Nov 2025 — Present
   role: Software Engineer 2
-  company: Uber (Uber for Business)
+  company: Uber
   description: >-
-    Building onboarding flows for enterprise customers. Hunted down a
-    year-old React bug nobody could crack and killed the site's noisiest
-    on-call alert in the process.
+    Rebuilding how companies onboard onto Uber for Business — swapped a
+    blank-slate setup flow for pick-a-template cards, plus some reward-based
+    incentives to get people to their first ride. Also chased down a
+    year-old React bug that had been haunting on-call.
 
 - id: traceable
   order: 2
