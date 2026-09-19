@@ -2,55 +2,75 @@
   order: 1
   name: TypeScript
   accent: yellow
-- id: angular
-  order: 2
-  name: Angular
-  accent: orange
 - id: react
-  order: 3
+  order: 2
   name: React
+  accent: orange
+- id: angular
+  order: 3
+  name: Angular
   accent: green
-- id: rxjs
+- id: nextjs
   order: 4
-  name: RxJS
+  name: Next.js
   accent: greenAlt
-- id: java
+- id: rxjs
   order: 5
-  name: Java
+  name: RxJS
   accent: blue
-- id: spring-boot
+- id: java
   order: 6
-  name: Spring Boot
+  name: Java
   accent: purple
-- id: graphql
+- id: spring-boot
   order: 7
-  name: GraphQL
+  name: Spring Boot
   accent: yellow
-- id: nodejs
+- id: graphql
   order: 8
-  name: Node.js
+  name: GraphQL
   accent: orange
-- id: d3js
+- id: grpc
   order: 9
-  name: D3.js
+  name: gRPC
   accent: green
-- id: postgresql
+- id: nodejs
   order: 10
-  name: PostgreSQL
+  name: Node.js
   accent: greenAlt
-- id: mongodb
+- id: kafka
   order: 11
-  name: MongoDB
+  name: Kafka
   accent: blue
-- id: docker
+- id: postgresql
   order: 12
-  name: Docker
+  name: PostgreSQL
   accent: purple
-- id: go
+- id: redis
   order: 13
-  name: Go
+  name: Redis
   accent: yellow
-- id: rust
+- id: mongodb
   order: 14
-  name: Rust
+  name: MongoDB
   accent: orange
+- id: kubernetes
+  order: 15
+  name: Kubernetes
+  accent: green
+- id: docker
+  order: 16
+  name: Docker
+  accent: greenAlt
+- id: playwright
+  order: 17
+  name: Playwright
+  accent: blue
+- id: go
+  order: 18
+  name: Go
+  accent: purple
+- id: rust
+  order: 19
+  name: Rust
+  accent: yellow

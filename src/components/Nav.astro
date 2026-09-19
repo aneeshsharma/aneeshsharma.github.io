@@ -1,6 +1,7 @@
 ---
 import SunIcon from './icons/SunIcon.astro';
 import MoonIcon from './icons/MoonIcon.astro';
+import MonitorIcon from './icons/MonitorIcon.astro';
 import MenuIcon from './icons/MenuIcon.astro';
 import CloseIcon from './icons/CloseIcon.astro';
 
@@ -37,6 +38,7 @@ const tabs = [
       <button id="theme-toggle" aria-label="Toggle theme" type="button">
         <SunIcon id="icon-sun" />
         <MoonIcon id="icon-moon" />
+        <MonitorIcon id="icon-system" />
       </button>
       <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links" type="button">
         <MenuIcon id="icon-menu" />
@@ -128,7 +130,8 @@ const tabs = [
   }
 
   :global(#icon-sun.icon-hidden),
-  :global(#icon-moon.icon-hidden) {
+  :global(#icon-moon.icon-hidden),
+  :global(#icon-system.icon-hidden) {
     display: none;
   }
 
@@ -249,27 +252,43 @@ const tabs = [
     const themeButton = document.getElementById('theme-toggle');
     const sunIcon = document.getElementById('icon-sun');
     const moonIcon = document.getElementById('icon-moon');
+    const systemIcon = document.getElementById('icon-system');
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
 
     function syncTheme() {
-      const theme = document.documentElement.getAttribute('data-theme');
-      sunIcon.classList.toggle('icon-hidden', theme !== 'light');
-      moonIcon.classList.toggle('icon-hidden', theme !== 'dark');
+      const mode = document.documentElement.getAttribute('data-theme-mode') || 'system';
+      sunIcon.classList.toggle('icon-hidden', mode !== 'light');
+      moonIcon.classList.toggle('icon-hidden', mode !== 'dark');
+      systemIcon.classList.toggle('icon-hidden', mode !== 'system');
     }
 
     syncTheme();
 
     themeButton.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      const currentMode = document.documentElement.getAttribute('data-theme-mode') || 'system';
+      // Once on 'system', jump straight to whichever theme the OS *isn't*
+      // showing right now, so the click always produces a visible change
+      // instead of landing back on the theme already on screen.
+      const order = media.matches ? ['system', 'light', 'dark'] : ['system', 'dark', 'light'];
+      const nextMode = order[(order.indexOf(currentMode) + 1) % order.length];
+
+      if (nextMode === 'system') {
+        localStorage.removeItem('theme');
+      } else {
+        localStorage.setItem('theme', nextMode);
+      }
+
+      const theme = nextMode === 'system' ? (media.matches ? 'dark' : 'light') : nextMode;
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.setAttribute('data-theme-mode', nextMode);
     });
 
-    // Keep in sync regardless of what changed the theme (this click, or the
-    // OS-preference listener in BaseLayout).
+    // Keep in sync regardless of what changed the mode (this click, or the
+    // OS-preference listener in BaseLayout, which only touches data-theme
+    // while mode stays 'system').
     new MutationObserver(syncTheme).observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-theme'],
+      attributeFilter: ['data-theme-mode'],
     });
 
     const menuButton = document.getElementById('menu-toggle');

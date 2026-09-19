@@ -1,6 +1,7 @@
 ---
 import GitHubIcon from './icons/GitHubIcon.astro';
 import LinkedInIcon from './icons/LinkedInIcon.astro';
+import ContactIcon from './icons/ContactIcon.astro';
 
 const NAME = 'Anish Sharma';
 const BIO =
@@ -20,7 +21,7 @@ const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
     <p class="bio">{BIO}</p>
     <div class="ctas">
       <a href="/#projects" class="cta-primary">View Projects</a>
-      <a href="/#contact" class="cta-secondary">Get in Touch</a>
+      <a href="/blog" class="cta-secondary">View Blog</a>
     </div>
     <div class="socials">
       <a href={GITHUB_URL} aria-label="GitHub" target="_blank" rel="noreferrer">
@@ -28,6 +29,9 @@ const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
       </a>
       <a href={LINKEDIN_URL} aria-label="LinkedIn" target="_blank" rel="noreferrer">
         <LinkedInIcon size={18} />
+      </a>
+      <a href="/#contact" aria-label="Contact">
+        <ContactIcon size={18} />
       </a>
     </div>
   </div>
@@ -138,6 +142,24 @@ const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
     height: 40px;
     border: 1px solid var(--border);
     border-radius: 8px;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .socials a:hover {
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .socials a {
+      transition: none;
+    }
+
+    .socials a:hover {
+      transform: none;
+    }
   }
 
   @media (max-width: 768px) {

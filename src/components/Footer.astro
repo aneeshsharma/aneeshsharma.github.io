@@ -7,6 +7,7 @@ const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
 ---
 
 <footer>
+  <a href="/blog" class="blog-link">Blog</a>
   <div class="links">
     <a href={GITHUB_URL} aria-label="GitHub" target="_blank" rel="noreferrer">
       <GitHubIcon size={16} />
@@ -25,7 +26,13 @@ const LINKEDIN_URL = 'https://linkedin.com/in/anishsharma15';
     padding: 8px 20px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+  }
+
+  .blog-link {
+    color: var(--status-text);
+    font-family: var(--font-mono);
+    font-size: 13px;
   }
 
   .links {

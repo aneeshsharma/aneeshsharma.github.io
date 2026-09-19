@@ -18,7 +18,13 @@ function formatDate(date: Date) {
 }
 ---
 
-<BaseLayout path={`~/blog/${post.id}`} description={post.data.description}>
+<BaseLayout
+  path="~/blog"
+  title={post.data.title}
+  description={post.data.description}
+  image="/og-image-blog.png"
+  type="article"
+>
   <article class="section post">
     <a href="/blog" class="back">← all writing</a>
     <div class="date">{formatDate(post.data.date)}</div>

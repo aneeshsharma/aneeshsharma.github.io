@@ -5,10 +5,23 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
   path?: string;
+  title?: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
 }
 
-const { path, description = "Anish Sharma's personal site — software engineer, builder of things." } = Astro.props;
+const {
+  path,
+  title,
+  description = "Anish Sharma's personal site — software engineer, builder of things.",
+  image = '/og-image.png',
+  type = 'website',
+} = Astro.props;
+
+const pageTitle = title ? `${title} — It's Anish` : "It's Anish";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(image, Astro.site);
 ---
 
 <!doctype html>
@@ -18,7 +31,21 @@ const { path, description = "Anish Sharma's personal site — software engineer,
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>It's Anish</title>
+    <link rel="alternate" type="application/rss+xml" title="Anish Sharma's blog" href="/rss.xml" />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{pageTitle}</title>
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="It's Anish" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,16 +58,19 @@ const { path, description = "Anish Sharma's personal site — software engineer,
       (function () {
         const media = window.matchMedia('(prefers-color-scheme: dark)');
         const stored = localStorage.getItem('theme');
-        const theme = stored || (media.matches ? 'dark' : 'light');
+        const mode = stored === 'dark' || stored === 'light' ? stored : 'system';
+        const theme = mode === 'system' ? (media.matches ? 'dark' : 'light') : mode;
         document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-theme-mode', mode);
 
-        if (!stored) {
-          media.addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme')) {
-              document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-            }
-          });
-        }
+        // Always listen, even if the initial mode isn't 'system' - the user
+        // can switch back to 'system' later via the nav toggle, and this
+        // check re-reads the live mode rather than the closed-over value.
+        media.addEventListener('change', (e) => {
+          if (document.documentElement.getAttribute('data-theme-mode') === 'system') {
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+          }
+        });
       })();
     </script>
 
